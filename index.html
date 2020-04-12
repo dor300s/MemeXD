@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/main.css">
+    <title>MemeXD</title>
+</head>
+
+<body onload="onInit()">
+
+    <header class="flex space-around">
+        <div class="top-container flex space-between">
+            <div class="logo flex"><img src="logo/logo.png" alt=""></div>
+            <img class="menu-btn hide-element" onclick="onToggleNavBar(this)" src="icons/bars-solid.svg" alt="">
+            <div class="nav-bar flex space-between align-center">
+                <li onclick="onShowCurrSection('gallery')">Gallery</li>
+                <li onclick="onShowCurrSection('saved-memes')">Memes</li>
+                <li onclick="onShowCurrSection('about')">About</li>
+            </div>
+        </div>
+    </header>
+
+    <section class="gallery flex column align-center">
+        <div class="search-container flex justify-center align-center">
+            <input class="input-img hide-element" id="files" type="file" onchange="onImgInput(event)" />
+            <label class="img-upload" for="files">Upload Image</label>
+            <input class="search-box" type="search" placeholder="Search Category" oninput="onFilterImages(value)">
+            <h2 class="show-all" onclick="onFilterImages(0)">show all</h2>
+        </div>
+        <div class="categories flex align-center"></div>
+        <div class="img-list"></div>
+    </section>
+
+    <section class="meme-editor flex justify-center hide-element">
+        <div class="canvas-container flex justify-center align-center">
+            <canvas class="my-canvas" onmousedown="onCheckElement(event)" ontouchmove="onChangeObjectPositionTouch(event)" onmousemove="onChangeObjectPosition(event)"
+                onmouseup="stopChangePosition()"></canvas>
+        </div>
+
+        <div class="editor-tools flex column space-around align-center">
+            <input class="input" type="text" oninput="onUpdateText(value)">
+            <div>
+                <button class="edit-btn" onclick="onAddLine()"><img src="icons/edit-solid.svg" alt="#"></button>
+                <button class="edit-btn" onclick="onDeleteLine()"><img src="icons/trash-solid.svg" alt="#"></button>
+            </div>
+            <select class="font-btn" name="font" id="font" onchange="onChangeFont(this.value)">
+                <option value="impact">Impact</option>
+                <option value="ariel">Ariel</option>
+                <option value="cursive">cursive</option>
+            </select>
+            <div class="flex space-between">
+                <button class="edit-btn" onclick="onIncFontSize()"><img src="icons/plus-solid.svg" alt="#"></button>
+                <button class="edit-btn" onclick="onDecFontSize()"><img src="icons/minus-solid.svg" alt="#"></button>
+
+
+                <label for="stroke-color"><img src="icons/paint-brush-solid.svg" class="edit-btn" alt="#"></label><input
+                    class="hide-element" type="color" id="stroke-color" onchange="onChangeStrokeColor(value)">
+
+                <label for="fill-color"><img src="icons/fill-drip-solid.svg" class="edit-btn" alt="#"></label><input
+                    class="hide-element" type="color" id="fill-color" onchange="onChangeFillColor(value)">
+            </div>
+            <div class="stickers flex">
+                <!-- <img src="stickers/epic.svg" onclick="onAddsticker(this)" alt="">
+                <img src="stickers/hot.svg" onclick="onAddsticker(this)" alt="">
+                <img src="stickers/lol.svg" onclick="onAddsticker(this)" alt="">
+                <img src="stickers/love.svg" onclick="onAddsticker(this)" alt="">
+                <img src="stickers/wtf.svg" onclick="onAddsticker(this)" alt=""> -->
+            </div>
+            <div class="meida-btn flex align-center">
+                <span class="check-mark hide-element">&#10003;</span>
+                <button class="edit-btn" onclick="onSaveImg()"><img src="icons/save-solid.svg" alt=""></button>
+                <a href="#" class="edit-btn" onclick="onDownloadCanvas(this)" download="my-img.jpg"><img
+                        src="icons/download-solid.svg" alt="#"></a>
+                <form action="" method="POST" enctype="multipart/form-data" onsubmit="uploadImg(this, event)">
+                    <input name="img" id="imgData" type="hidden" />
+                    <button class="edit-btn" type="submit"><img src="icons/share-alt-solid.svg" alt="#"></button>
+                </form>
+                <div class="share-container" onclick=></div>
+            </div>
+        </div>
+    </section>
+
+    <section class="saved-memes flex column align-center hide-element">
+        <h2>Your memes:</h2>
+        <div class="saved-memes-list"></div>
+        <div class="saved-memes-modal hide-element flex column justify-center"></div>
+        <div class="screen hide-element"></div>
+    </section>
+
+    <section class="about hide-element">
+        <h2>© This is about page! ©</h2>
+    </section>
+
+    <footer>
+        <div class="footer"></div>
+    </footer>
+
+    <script src="js/meme-storage.js"></script>
+    <script src="js/meme-service.js"></script>
+    <script src="js/user-controller.js"></script>
+</body>
+
+</html>
