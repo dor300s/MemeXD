@@ -221,6 +221,11 @@ header {
   top: 50%;
 }
 
+
+.saved-memes{
+    margin-bottom: 100px;
+}
+
 .saved-memes-modal {
     position: absolute;
     width: 60vw;
